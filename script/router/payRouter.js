@@ -255,6 +255,7 @@ router.get("/success/:orderId", async (req, res) => {
   await dataRep.confirmPaymentByCash(orders[0].id);
   res.redirect("/pos");
 });
+
 // http://localhost:5000/pay/creditcard/:trade_no
 router.post("/creditcard/:trade_no", (req, res) => {
   const orderId = req.params["trade_no"];

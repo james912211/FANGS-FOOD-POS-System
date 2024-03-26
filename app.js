@@ -45,7 +45,7 @@ app.use(bodyParser.json());
 app.set("view engine", "ejs");
 
 app.use(express.static("public"));
-const path = require("path");
+
 app.set("views", path.join(__dirname, "views"));
 
 // 初始化打印機
@@ -112,11 +112,6 @@ connection.connect((err) => {
 });
 
 // 取得區網IP
-const {
-  getLocalIPAddress,
-  getNetIPAddress,
-  getPublicIP,
-} = require("./script/getIPAddress.js");
 
 // 因為你不能在最頂層使用 await，所以我們創建一個立即執行的 async 函數
 (async () => {
