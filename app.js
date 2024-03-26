@@ -11,6 +11,12 @@ require("./script/passport");
 const passport = require("passport");
 const session = require("express-session");
 const flash = require("connect-flash");
+const path = require("path");
+const {
+  getLocalIPAddress,
+  getNetIPAddress,
+  getPublicIP,
+} = require("./script/getIPAddress.js");
 
 //設定middleware跟排版引擎
 app.set("view engine", "ejs");
@@ -34,7 +40,6 @@ app.use((req, res, next) => {
   res.locals.error = req.flash("error");
   next();
 });
-
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.set("view engine", "ejs");
@@ -75,9 +80,12 @@ app.use("/order", orderRouter);
 const payRouter = require("./script/router/payRouter");
 app.use("/pay", payRouter);
 
+// http://localhost:3000/pay
 const authRoutes = require("./script/router/auth_routes.js");
-const profileRoutes = require("./script/router/profile_routes");
 app.use("/auth", authRoutes);
+
+// http://localhost:3000/pay
+const profileRoutes = require("./script/router/profile_routes");
 app.use("/profile", profileRoutes);
 
 // const dataRouter = require('./script/router/dataRouter');
